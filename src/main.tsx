@@ -1,10 +1,77 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import { Bell, BookmarkSimple, DotsThreeCircle, Envelope, FileText, Hash, House, Sparkle, User } from 'phosphor-react'
+
+
+import './Global.css';
+
+import twitterLogo from './assets/logo-twitter.svg'
+import { Tweet } from './Componentes/Tweet';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <div className='layout'>
+      <aside className='sidebar'>
+        <img className='logo' src={twitterLogo} alt='Logo' />
+
+        <nav className='main-navegation'>
+          <a className='active' href='#'>
+            <House weight='fill' />
+            Home
+            </a>
+          <a href='#'>
+            <Hash />
+            Notifications
+            </a>
+          <a href='#'>
+            <Bell />
+            Notifications
+            </a>
+          <a href='#'>
+            <Envelope />
+            Massages
+          </a>
+          <a href='#'>
+            <BookmarkSimple />
+            Bookmarks
+            </a>
+          <a href='#'>
+            <FileText />
+            Lists
+            </a>
+          <a href='#'>
+            <User />
+            Profile
+            </a>
+          <a href='#'>
+            <DotsThreeCircle />
+            More
+            </a>
+        </nav>
+        <button className='new-tweet'>Tweet</button>
+      </aside>
+      <div className='content'>
+        <main className='timeline'>
+          <div className='timeline-header'>
+            <p>Home</p>
+            <Sparkle />
+          </div>
+
+          <form className='new-tweet-form'>
+            <label htmlFor='tweet'>
+              <img src="https://github.com/MatheusFiigueiredo.png" alt="Matheus Figueiredo" />
+              <textarea id='tweet' placeholder="What's happening?"/>
+            </label>
+
+            <button type='submit'>Tweet</button>
+          </form>
+
+          <div className='separator'></div>
+
+          <Tweet />       
+
+        </main>
+      </div>
+    </div>
   </React.StrictMode>,
 )
