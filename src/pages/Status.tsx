@@ -1,15 +1,24 @@
+import { FormEvent, useState } from 'react'
 import { Header } from '../Componentes/Header'
 import { Separator } from '../Componentes/Separator'
 import { Tweet } from '../Componentes/Tweet'
 import './Status.css'
 
-const answer = [
-    'Concordo...',
-    'Olha, faz sentido!',
-    'Parabéns pelo progresso!',
-]
+export function Status (){  
+  const [newAnswers, setNewAnswers] = useState('')
+  const [answers, setAnswers] = useState([
+    'Meu primeiro tweet',
+    'Teste',
+    "Deu certo meu tweet!"
+  ])
 
-export function Status (){   
+  function createNewAnswers(event: FormEvent) {
+    event.preventDefault()
+
+    setAnswers([newAnswers, ...answers])
+    setNewAnswers('')
+  }
+  
     return(
         <main className='status'>
         <Header title='Tweet' />
@@ -21,17 +30,23 @@ export function Status (){
 
         <Separator />
 
-        <form className='answer-tweet-form'>
+        <form onSubmit={createNewAnswers} className='answer-tweet-form'>
           <label htmlFor='tweet'>
             <img src="https://github.com/MatheusFiigueiredo.png" alt="Matheus Figueiredo" />
-            <textarea id='tweet' placeholder="Tweet you answer" />
+            <textarea id='tweet' 
+            placeholder="Tweet you answer" 
+            value={newAnswers}
+            onChange={(event) => {
+              setNewAnswers(event.target.value)
+            }}
+            />
           </label>
 
             <button type='submit'>Answer</button>
         </form>
 
 
-        {answer.map(answer => {
+        {answers.map(answer => {
           return <Tweet content={answer} />
         })}
 
